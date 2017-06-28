@@ -1,26 +1,25 @@
 @(loginForm: Form[Login])
-@import scripts._
+    @import scripts._
     @main("Вход") {
-@*//        @if(loginForm.hasErrors) {*@
+        @if(loginForm.hasErrors) {
             <div>
-@*//                @if(loginForm.errors.size() > 0) {*@
-@*//                    @for((key, value) <- loginForm.errors) {*@
-@*//                        @for(err <- value) {*@
-                            @*<p>@err.message().toString()</p>*@
-@*//                        }*@
-                    @*}*@
-                @*}*@
+            @if(loginForm.errors.size() > 0) {
+                @for((key, value) <- loginForm.errors) {
+                    @for(err <- value) {
+                        <p>@err.message().toString()</p>
+                    }
+                }
+            }
             </div>
-        @*}*@
-@*//        @helper.form(routes.Auth.auth()) {*@
+        }
+        @helper.form(routes.Auth.auth()) {
             <h2>Вход</h2>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-@*//            @input(loginForm("email"), "Email", 'type -> "text")*@
-@*//            @input(loginForm("password"), "Пароль", 'type -> "password")*@
+            @input(loginForm("email"), "Email", 'type -> "text")
+            @input(loginForm("password"), "Пароль", 'type -> "password")
 
             <div>
-                <button type="submit">Войти</button> или
-//                @*<a href="@routes.Auth.signup()">Зарегистрироваться</a>*@
+                <button type="submit">Войти</button>
             </div>
-        @*}*@
+        }
     }
+

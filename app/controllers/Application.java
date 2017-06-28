@@ -6,6 +6,7 @@ import models.Product;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.util.parsing.combinator.testing.Str;
 import views.html.err;
 
 import java.util.UUID;
@@ -52,7 +53,15 @@ public class Application extends Controller {
     public static Result viewGroupRoot(String transliterationNameOfRoot) {
         GroupRoot g = GroupRoot.findByTransliterationName(transliterationNameOfRoot);
         return ok(
-                views.html.template.viewGroupRoot.render(g.getGroupProducts())
+                views.html.template.viewGroupRoot.render(g)
+        );
+    }
+
+    public static Result viewGroupProduct(String transliterationNameOfRoot, String transliterationNameOfGroup) {
+        GroupRoot g = GroupRoot.findByTransliterationName(transliterationNameOfRoot);
+        GroupProduct gp = GroupProduct.findByTransliterationName(transliterationNameOfGroup,g);
+        return ok(
+                views.html.template.viewGroupProduct.render(gp)
         );
     }
 

@@ -25,15 +25,16 @@ public class Secured extends Security.Authenticator {
      * @param ctx контекст
      * @return перенаправление на страницу логина
      */
-//    @Override
-//    public Result onUnauthorized(Context ctx) {
-//        Http.Session session = ctx.session();
-//        if (getUsername(ctx)!= null){
-//            return null;
-//        }else{
-//            return redirect(controllers.routes.Application.index());
-//        }
-//
-//    }
+    @Override
+    public Result onUnauthorized(Context ctx) {
+        Http.Session session = ctx.session();
+        if (getUsername(ctx)!= null){
+            return null;
+        }else{
+            return redirect(controllers.routes.Auth.login());
+        }
+
+    }
 
 }
+

@@ -40,11 +40,11 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/index">Active</a></li>
+                        <li class="active"><a href="/index">Главная</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.html">profile</a></li>
-                        <li><a href="login.html">logout</a></li>
+                        @*<li><a href="login.html">profile</a></li>*@
+                        @*<li><a href="login.html">logout</a></li>*@
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -55,7 +55,7 @@
                     <aside>
                         <div class="clearfix">
                             @*<img src="@routes.Assets.at("images/template/dog.jpg")" alt="dog image" class="img-circle profile-image">*@
-                            <p>Каталог</p>
+                            <p style="text-align: center;">Каталог</p>
                             <div class="sidebar">
                                 <ul class="nav">
                                     @for(groupRoot <- GroupRoot.all()) {
@@ -64,7 +64,8 @@
                                                 <span>@groupRoot.getName()</span>
                                             </a>
                                             }
-                                </li>
+                                        </li>
+
                                 </ul>
                             </div>
                             <hr class="hidden-xs hidden-sm">

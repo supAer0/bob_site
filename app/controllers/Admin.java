@@ -9,13 +9,15 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import util.Secured;
 
 import java.util.List;
 import java.util.UUID;
 
 import static play.libs.Json.toJson;
 
-
+@Security.Authenticated(Secured.class)
 public class Admin extends Controller {
     static Form<Product> productForm = Form.form(Product.class);
     static Form<GroupRoot> groupRootForm = Form.form(GroupRoot.class);

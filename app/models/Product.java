@@ -63,6 +63,17 @@ public class  Product extends Model{
         }
         return null;
     }
+
+    public static List<Product> allForGroupRoot(GroupRoot groupRoot){
+        List<Product> all =all();
+        List<Product> res =new ArrayList<>();
+        for (Product p:all) {
+           if(p.getGroupProduct().getGroupRoot().getId().equals(groupRoot.getId())){
+               res.add(p);
+           }
+        }
+        return res;
+    }
     public void setGroupProduct(GroupProduct groupProduct){
         this.groupProduct =groupProduct;
     }

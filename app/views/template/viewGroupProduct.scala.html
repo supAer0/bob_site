@@ -1,23 +1,19 @@
-@(groupRoot: GroupRoot)
+@(groupProduct: GroupProduct)
 @import models._
 @main("test"){
     <div class="col-md-8">
-    <ul class="nav nav-pills">
-        @for(g<-groupRoot.getGroupProducts){
-        <li><a href="@groupRoot.getTransliterationName/@g.getTransliterationName">@g.getName</a></li>}
-    </ul>
-        <h4>Все продукты:</h4>
+        <h4>Все продукты в группе @groupProduct.getName:</h4>
         <table class="table table-striped">
             <thead>
                 <tr><th>Название</th><th>Стоимость</th><th>Количество</th></tr>
             </thead>
             <tbody data-bind="foreach: productValues">
-                @for(p<-Product.allForGroupRoot(groupRoot)){
-                <tr><a href="@p.getTransliterationName"></a>
+                @for(p<-groupProduct.getProducts){
+                    <tr><a href="@p.getTransliterationName"></a>
                         <td><a href="">@p.getName</a></td>
                         <td>@p.getAmount</td>
                         <td>@p.getCost</td> }
-                </tr>
+            </tr>
             </tbody>
         </table>
     </div>
