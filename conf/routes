@@ -1,0 +1,45 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                     controllers.Admin.index()
+GET     /index                  controllers.Application.index()
+GET     /catalog/:transliterationNameOfRoot  controllers.Application.viewGroupRoot(transliterationNameOfRoot: String)
+
+#Admin
+GET     /admin                controllers.Admin.dashboars()
+GET     /admin/products       controllers.Admin.products()
+GET     /admin/groups         controllers.Admin.groups()
+GET     /admin/groups/:transliterationNameOfRoot/:transliterationNameOfGroup/:transliterationNameOfProduct controllers.Admin.viewProductValues(transliterationNameOfRoot:String, transliterationNameOfGroup: String, transliterationNameOfProduct: String)
+GET     /admin/groups/:transliterationNameOfRoot/:transliterationNameOfGroup controllers.Admin.viewProduct(transliterationNameOfRoot:String, transliterationNameOfGroup: String)
+GET     /admin/groups/:transliterationName controllers.Admin.viewGroup(transliterationName: String)
+#Api admin
+GET     /api/products                  controllers.Admin.productsJson()
+POST    /api/products                  controllers.Admin.saveProductJson()
+DELETE  /api/products                  controllers.Admin.deleteProductJson()
+GET     /api/groups                    controllers.Admin.groupsJson()
+POST    /api/groups                    controllers.Admin.saveGroupJson()
+DELETE  /api/groups                    controllers.Admin.deleteGroupJson()
+GET     /api/groupsProduct             controllers.Admin.groupsProductJson()
+POST    /api/groupsProduct             controllers.Admin.saveGroupProductJson()
+DELETE  /api/groupsProduct             controllers.Admin.deleteGroupProductJson()
+GET     /api/attributes                controllers.Admin.attributesJson()
+POST    /api/attributes                controllers.Admin.saveAttributeJson()
+DELETE  /api/attributes                controllers.Admin.deleteAttributeJson()
+GET     /api/productValues             controllers.Admin.productValuesJson()
+#POST    /api/productValues             controllers.Admin.saveProductValuesJson()
+GET     /api/jsRoutes                  controllers.Admin.jsRoutes
+
+#
+#GET		/login  		controllers.Auth.login()
+#GET		/register		controllers.Auth.signup()
+#POST	/login			controllers.Auth.auth()
+#GET	    /logout			controllers.Auth.logout()
+#POST	/register		controllers.Auth.register()
+
+# Map static resources from the /public folder to the /assets URL path
+GET		/assets/*file	controllers.Assets.at(path="/public", file)
+GET		/*path			controllers.Application.error(path: String)
+
+

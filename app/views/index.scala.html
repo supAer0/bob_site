@@ -1,0 +1,41 @@
+@(products: List[Product], productForm: Form[Product],groups: List[GroupProduct])
+
+@import helper._
+
+@main("Todo list") {
+<div class="products">
+@*<h1>@products.size() products(s)</h1>*@
+
+@*<ul>*@
+@*//   @for(product <- products) {*@
+   @*<li>*@
+      @*Name: @product.getName() <br/>*@
+           @*Cost: @product.getCost() <br/>*@
+           @*Amount: @product.getAmount() <br/>*@
+           @*Description: @product.getDescription()*@
+
+
+@*//           @form(routes.Application.deleteProduct(product.getId())) {*@
+//               @*<input type="submit" value="Delete">*@
+
+               @*<hr/>*@
+
+           @*}*@
+   @*</li>*@
+   @*}*@
+@*</ul>*@
+</div>
+<div class="newProduct">
+<h2>Add a new task</h2>
+@*//    @form(routes.Application.newProduct()) {*@
+
+@*//    @inputText(productForm("name"))*@
+@*//    @inputText(productForm("cost"))*@
+@*//    @inputText(productForm("amount"))*@
+@*//    @textarea(productForm("description"), args = 'rows -> 2, 'cols -> 25)*@
+
+
+    <input type="submit" value="Create">
+
+</div>
+}

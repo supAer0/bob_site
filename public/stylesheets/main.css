@@ -1,0 +1,12 @@
+.products{
+    width:400px;
+    position:absolute;
+    margin-left:410px;
+}
+.newProduct{
+    border:1px solid grey;
+    width:350px;
+    position:absolute;
+    margin-top:10px;
+    padding:10px;
+}

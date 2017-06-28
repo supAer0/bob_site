@@ -1,0 +1,32 @@
+@(productForm: Form[Product])
+
+@import scripts._
+
+@main("Записная книжка") {
+    <div data-bind="productViewModel">
+        <div class="products">
+            <li data-bind="foreach: products">
+                    <p data-bind="text: name"></p>
+                    <p data-bind="text: description"></p>
+                    <p data-bind="text: cost"></p>
+                    <p data-bind="text: amount"></p>
+                        <a href="#" data-bind="click: $root.editProduct">Редактировать</a>
+                        <a href="#" data-bind="click: $root.removeProduct">Удалить</a>
+                 <hr/>
+             </li>
+
+        </div>
+    </div>
+
+    <form>
+        @text(productForm("name"),  "Наименование", "", "", "value: name")
+        @text(productForm("description"), "Описание товара", "", "" , "value: description")
+        @text(productForm("cost"), "Стоимость", "", "", "value: cost")
+        @text(productForm("amount"), "Количество", "", "", "value: amount")
+        <button type="submit" value="submit" data-bind="click: $root.saveProduct">Сохранить</button>
+    </form>
+
+    <script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/content.js")'></script>
+
+
+}

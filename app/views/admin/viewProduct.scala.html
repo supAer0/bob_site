@@ -1,0 +1,115 @@
+@(productForm: Form[Product], groupRoot: GroupRoot,groupProduct: GroupProduct)
+
+@import bootstrap._
+@import helper._
+
+@main(groupRoot.getName + "/" + groupProduct.getName) {
+    <input type="text" class="hidden" id="groupProductId" data-bind="text: groupProductId" value="@groupProduct.getId">
+    <input type="text" class="hidden" id="groupRootId" data-bind="text: groupRootId" value="@groupRoot.getId">
+    <script>
+            var groupProductId = $("#groupProductId").val();
+            var groupRootId = $("#groupRootId").val();
+    </script>
+    <div class="content" data-bind="groupProductViewModel">
+        <header class="clearfix">
+            <h2 class="page_title pull-left"><a href="/admin/groups/@groupRoot.getTransliterationName">@groupRoot.getName</a> / @groupProduct.getName</h2>
+        </header>
+        <div class="content-inner">
+            <div class="row">
+                <div class="col-md-8">
+                    <header>
+                        <h2 class="page_title">Продукты</h2>
+                    </header>
+                    <div class="content-inner" data-bind="foreach: products">
+                        <div class="row product-row">
+                            <div class="col-xs-2 col-sm-1 col-md-1 status-padding">
+                                <span class="label label-success label-sm">Active</span>
+                            </div>
+                            <div class="col-xs-10 xol-sm-6 col-md-8 product-title">
+                                <p data-bind="text: name"></p>
+                                <small data-bind="text: cost"></small>
+                                <small data-bind="text: amount"></small>
+                            </div>
+                            <div class="col-xs-10 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+                                <div class="product-actions">
+                                    <a class="btn btn-xs btn-default" data-bind="attr: { href: '@groupProduct.getTransliterationName' +'/'+transliterationName}" role="button">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;View</span>
+                                    </a>
+                                    <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.editProduct">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Edit</span>
+                                    </a>
+                                    <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.removeProduct">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Delete</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-4">
+                    <header>
+                        <h2 class="page_title">Create new</h2>
+                    </header>
+                    <div class="content-inner">
+                        <div class="form-wrapper">
+                            <form>
+                                @field(productForm("name"),  "Name", "Name", "", "value: name")
+                                @field(productForm("cost"), "Cost", "Cost", "" , "value: cost")
+                                @field(productForm("amount"), "Amount", "Amount", "", "value: amount")
+                                @*<div class="form-group">*@
+                                    @*<table class="table table-striped">*@
+                                        @*<thead>*@
+                                            @*<tr><th>Название</th><th>Значенние</th></tr>*@
+                                        @*</thead>*@
+                                        @*<tbody data-bind="foreach: attributes">*@
+                                            @*<tr>*@
+                                                @*<td data-bind="text: name"></td>*@
+                                                @*<td><input class="form-control" type="text" data-bind="value"></td>*@
+                                            @*</tr>*@
+                                        @*</tbody>*@
+                                    @*</table>*@
+                                @*</div>*@
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control textarea" placeholder="Description" name="Description" data-bind="value: description"></textarea>
+                                </div>
+                                <div class="clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right" data-bind="click: $root.saveProduct" id="btn-add">Save / Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@routes.Assets.at("javascripts/chosen.jquery.min.js")"></script>
+    <script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/products.js")'></script>
+
+    <script type="text/JavaScript">
+            window.onload = function() {
+                var mass = ['/assets/stylesheets/products.css', '/assets/stylesheets/chosen.min.css', '/assets/stylesheets/new-product.css'];
+                for (var i = 0; i < mass.length; i++) {
+                    var a = document.createElement("link");
+                    a.rel = "stylesheet";
+                    a.href = mass[i];
+                    document.getElementsByTagName("head")[0].appendChild(a)
+                }
+            };
+
+            var config = {
+                '.chosen-select' : {},
+                '.chosen-select-deselect' : {allow_single_deselect: true},
+                '.chosen-select-no-single' : {disable_search_threshold: 10},
+                '.chosen-select-no-result': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+    </script>
+}

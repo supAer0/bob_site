@@ -1,0 +1,130 @@
+@(groupRootForm: Form[GroupRoot])
+
+@import bootstrap._
+@main("All group") {
+
+    <div class="content" data-bind="groupViewModel">
+        <header class="clearfix">
+            <h2 class="page_title pull-left">All groups</h2>
+            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#createOrViewGroup">Create new group</button>
+            <div class="modal fade" id="createOrViewGroup" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Create or view group</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="content-inner">
+                                <div class="form-wrapper">
+                                    <form>
+                                        @field(groupRootForm("name"),  "Name", "Name", "", "value: name")
+                                        <div class="form-group">
+                                            <label>Group</label>
+                                            <select  data-placeholder="Select groups" multiple name="tags" class="form-control chosen-select">
+                                                <option value=""></option>
+                                                <option value="">Test1</option>
+                                                <option value="">Test2</option>
+                                                <option value="">Test3</option>
+                                                <option value="">Test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="clearfix">
+                                            <label id="check"><input type="checkbox" id="checkClose">&nbsp;close</label>
+                                            <button type="submit" class="btn btn-primary pull-right" data-bind="click: $root.saveGroup" id="btn-add">Save / Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="content-inner">
+            <div class="row search-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-field" id="search" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary go">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div  data-bind="foreach: groups">
+                <div class="row product-row">
+                    <div class="col-xs-2 col-sm-1 col-md-1 status-padding">
+                        <span class="label label-success label-sm">Active</span>
+                    </div>
+                    <div class="col-xs-10 xol-sm-6 col-md-8 product-title">
+                        <p data-bind="text: name"></p>
+                    </div>
+                    <div class="col-xs-10 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+                        <div class="product-actions">
+                            <a class="btn btn-xs btn-default"  data-bind="attr: { href: 'groups/'+transliterationName}" role="button">
+                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;View</span>
+                            </a>
+
+                            <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.editGroup">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Edit</span>
+                            </a>
+
+                            <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.removeGroup">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Delete</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <nav>
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@routes.Assets.at("javascripts/chosen.jquery.min.js")"></script>
+    <script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/groups.js")'></script>
+
+    <script type="text/JavaScript">
+            window.onload = function() {
+                var mass = ['/assets/stylesheets/products.css', '/assets/stylesheets/chosen.min.css', '/assets/stylesheets/new-product.css'];
+                for (var i = 0; i < mass.length; i++) {
+                    var a = document.createElement("link");
+                    a.rel = "stylesheet";
+                    a.href = mass[i];
+                    document.getElementsByTagName("head")[0].appendChild(a)
+                }
+            };
+
+            var config = {
+                '.chosen-select' : {},
+                '.chosen-select-deselect' : {allow_single_deselect: true},
+                '.chosen-select-no-single' : {disable_search_threshold: 10},
+                '.chosen-select-no-result': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+    </script>
+}

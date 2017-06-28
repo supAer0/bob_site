@@ -1,0 +1,65 @@
+
+@main("New product") {
+
+    <div class="content">
+        <header>
+            <h2 class="page_title">Create new products</h2>
+        </header>
+        <div class="content-inner">
+            <div class="form-wrapper">
+                <form>
+                    <div class="form-group">
+                        <label class="sr-only">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Groups</label>
+                        <select data-placeholder="Select groups" multiple name="tags" class="form-control chosen-select">
+                            <option value=""></option>
+                            <option value="">Test1</option>
+                            <option value="">Test2</option>
+                            <option value="">Test3</option>
+                            <option value="">Test4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Description</label>
+                        <textarea class="form-control summernote" placeholder="Description" name="Description"></textarea>
+                    </div>
+                    <div class="clearfix">
+                        <button type="submit" class="btn btn-primary pull-right">Save / Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="@routes.Assets.at("stylesheets/dist/summernote.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/chosen.jquery.min.js")"></script>
+    <script type="text/JavaScript">
+            window.onload = function() {
+                var mass = ['/assets/stylesheets/chosen.min.css', '/assets/stylesheets/dist/summernote.css', '/assets/stylesheets/new-product.css'];
+                for (var i = 0; i < mass.length; i++) {
+                    var a = document.createElement("link");
+                    a.rel = "stylesheet";
+                    a.href = mass[i];
+                    document.getElementsByTagName("head")[0].appendChild(a)
+                }
+            }
+
+            var config = {
+                '.chosen-select' : {},
+                '.chosen-select-deselect' : {allow_single_deselect: true},
+                '.chosen-select-no-single' : {disable_search_threshold: 10},
+                '.chosen-select-no-result': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+            $('.summernote').summernote({
+                height:200
+            });
+    </script>
+}

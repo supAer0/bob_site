@@ -1,0 +1,141 @@
+@(groupProductForm: Form[GroupProduct], groupRoot: GroupRoot)
+
+@import bootstrap._
+@import helper._
+
+@main(groupRoot.getName) {
+    <input type="text" class="hidden" id="groupRootId" data-bind="text: groupRootId" value="@groupRoot.getId">
+        <script>
+            var groupRootId = $("#groupRootId").val();
+        </script>
+    <div class="content" data-bind="groupProductViewModel">
+        <header class="clearfix">
+            <h2 class="page_title pull-left">@groupRoot.getName</h2>
+        </header>
+        <div class="content-inner">
+            <div class="row">
+                <div class="col-md-8">
+                    <header>
+                        <h2 class="page_title">Группы с продуктами</h2>
+                    </header>
+                    <div  class="content-inner" data-bind="foreach: groupsProduct">
+                    <div class="row product-row">
+                        <div class="col-xs-2 col-sm-1 col-md-1 status-padding">
+                            <span class="label label-success label-sm">Active</span>
+                        </div>
+                        <div class="col-xs-10 xol-sm-6 col-md-8 product-title">
+                            <p data-bind="text: name"></p>
+                        </div>
+                        <div class="col-xs-10 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+                            <div class="product-actions">
+                                <a class="btn btn-xs btn-default"  data-bind="attr: { href: '@groupRoot.getTransliterationName' +'/'+ transliterationName}" role="button">
+                                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;View</span>
+                                </a>
+
+                                <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.editGroupProduct">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Edit</span>
+                                </a>
+
+                                <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.removeGroupProduct">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Delete</span>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-4">
+                        <header>
+                            <h2 class="page_title">Create new</h2>
+                        </header>
+                        <div class="content-inner">
+                            <div class="form-wrapper">
+                                <form>
+                                    @field(groupProductForm("name"),  "Name", "Name", "", "value: name")
+                                    <div class="clearfix">
+                                        <button type="submit" class="btn btn-primary pull-right" data-bind="click: $root.saveGroupProduct" id="btn-add">Save / Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+    </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <header>
+                        <h2 class="page_title">Атрибуты для товаров [группы: @groupRoot.getName]</h2>
+                    </header>
+                    <div class="content-inner" data-bind="foreach: attributes">
+                        <div class="row product-row">
+                            <div class="col-xs-2 col-sm-1 col-md-1 status-padding">
+                                <span class="label label-success label-sm">Active</span>
+                            </div>
+                            <div class="col-xs-10 xol-sm-6 col-md-8 product-title">
+                                <p data-bind="text: name"></p>
+                            </div>
+                            <div class="col-xs-10 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+                                <div class="product-actions">
+                                    <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.editAttribute">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Edit</span>
+                                    </a>
+
+                                    <a class="btn btn-xs btn-default" href="#" role="button" data-bind="click: $root.removeAttribute">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Delete</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <header>
+                        <h2 class="page_title">Create new</h2>
+                    </header>
+                    <div class="content-inner">
+                        <div class="form-wrapper">
+                            <form>
+                                @field(groupProductForm("name"),  "Name", "Name", "", "value: attributeName")
+                                <div class="clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right" data-bind="click: $root.saveAttribute" id="btn-add">Save / Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@routes.Assets.at("javascripts/chosen.jquery.min.js")"></script>
+    <script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/groupsProduct.js")'></script>
+
+    <script type="text/JavaScript">
+            window.onload = function() {
+                var mass = ['/assets/stylesheets/products.css', '/assets/stylesheets/chosen.min.css', '/assets/stylesheets/new-product.css'];
+                for (var i = 0; i < mass.length; i++) {
+                    var a = document.createElement("link");
+                    a.rel = "stylesheet";
+                    a.href = mass[i];
+                    document.getElementsByTagName("head")[0].appendChild(a)
+                }
+            };
+
+            var config = {
+                '.chosen-select' : {},
+                '.chosen-select-deselect' : {allow_single_deselect: true},
+                '.chosen-select-no-single' : {disable_search_threshold: 10},
+                '.chosen-select-no-result': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+    </script>
+}

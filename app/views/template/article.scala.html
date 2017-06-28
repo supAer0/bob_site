@@ -1,0 +1,38 @@
+@*//@(article: Article, categories: List[Category],topArticles: List[Article])*@
+@*//@main(article.getTitle, categories,topArticles) {*@
+@*<div class="col-md-8">*@
+    @*<article>*@
+        @*<h1>@article.getTitle</h1>*@
+        @*<div class="lead">@Html(article.getDescription)</div>*@
+    @*</article>*@
+
+    @*<div id="comments">*@
+        @*<h2>Comments</h2>*@
+        @*<div class="row">*@
+            @*div class="col-md-11">*@
+                @*<p>*@
+                    @*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum hic vel officia blanditiis nihil numquam.*@
+                @*</p>*@
+                @*<footer>*@
+                    @*<small><b>Aleksey Tomilov</b> Commented on 01.05.2017</small>*@
+                @*</footer>*@
+                @*<hr>*@
+            @*</div>*@
+            @*<div class="col-md-1 comments-num">01</div>**@
+        @*</div>*@
+
+        @*<form>*@
+            @*<h4>Have you say</h4>*@
+            @*<p>*@
+                @*<label for="sr-only">Message</label>*@
+                @*<textarea placeholder="Message" required autocomplete id="message" class="form-control"></textarea>*@
+            @*</p>*@
+                @*<!--               <p>*@
+                @*<label class="sr-only">Email address</label>*@
+                @*<input type="email" required placeholder="Email" >*@
+              @*</p> -->*@
+            @*<p><input type="submit" class="btn btn-primary" value="Send Message"></p>*@
+        @*</form>*@
+    @*</div>*@
+@*</div>*@
+@*}*@

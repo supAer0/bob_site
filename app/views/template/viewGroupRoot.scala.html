@@ -1,0 +1,6 @@
+@(groupProducts: List[GroupProduct])
+@main("test"){
+    @for(g<-groupProducts) {
+        <p>@g.getName</p>
+    }
+}

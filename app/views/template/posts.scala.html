@@ -1,0 +1,47 @@
+@*//@(articles: List[Article], categories: List[Category], topArticles: List[Article])*@
+@*//@main("posts", categories,topArticles) {*@
+@*<div class="col-md-8">*@
+@*//@for(article <- articles.reverse) {*@
+@*//    @(if article.getCategory.getName.equals(null)){*@
+        @*<article>*@
+            @*<header><h2>@article.getTitle</h2></header>*@
+            @*<footer><small>Posted on @article.getDate</small></footer>*@
+
+            @*<div class="lead">@article.getPreviewDescription...<a href="@article.getUrl">Read more</a>*@
+                 @*</div>*@
+            @*<footer><span class="label label-default">@article.getCategory.getName()</span></footer>*@
+            @*<hr>*@
+
+            @*}*@
+        @*</article>*@
+@*//@if(articles.length > 1) {*@
+    @*<div class="row">*@
+        @*<div class="col-md-12">*@
+            @*<nav>*@
+                @*<ul class="pagination">*@
+                    @*<li><a href="#">&laquo;</a></li>*@
+                    @*<li><a href="#">1</a></li>*@
+                    @*<li><a href="#">2</a></li>*@
+                    @*<li><a href="#">3</a></li>*@
+                    @*<li><a href="#">4</a></li>*@
+                    @*<li><a href="#">5</a></li>*@
+                    @*<li><a href="#">&raquo;</a></li>*@
+                @*</ul>*@
+            @*</nav>*@
+        @*</div>*@
+    @*</div>*@
+@*}*@
+@*</div>*@
+    @*<script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/template/content.js")'></script>*@
+@*<script type="text/JavaScript">*@
+            @*window.onload = function() {*@
+                @*var mass = ['/assets/stylesheets/template/posts.css'];*@
+                @*for (var i = 0; i < mass.length; i++) {*@
+                    @*var a = document.createElement("link");*@
+                    @*a.rel = "stylesheet";*@
+                    @*a.href = mass[i];*@
+                    @*document.getElementsByTagName("head")[0].appendChild(a)*@
+                @*}*@
+            @*}*@
+                @*</script>*@
+@*}*@

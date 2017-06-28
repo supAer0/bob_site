@@ -1,0 +1,78 @@
+@(productValueForm: Form[ProductValue], product: Product)
+
+@import bootstrap._
+@import helper._
+
+@main(product.getName) {
+    <input type="text" class="hidden" id="productId" data-bind="text: productId" value="@product.getId">
+    <script>
+            var productId = $("#productId").val();
+    </script>
+    <div class="content" data-bind="productValuesViewModel">
+        <header class="clearfix">
+            <h2 class="page_title pull-left"><a href="/admin/groups/@product.getGroupProduct.getGroupRoot.getTransliterationName">@product.getGroupProduct.getGroupRoot.getName</a> / <a href="/admin/groups/@product.getGroupProduct.getGroupRoot.getTransliterationName/@product.getGroupProduct.getTransliterationName">@product.getGroupProduct.getName</a> / @product.getName</h2>
+        </header>
+        <div class="content-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <header>
+                        <h2 class="page_title">@product.getName</h2>
+                    </header>
+                    <div class="content-inner">
+                        <div class="form-wrapper">
+                            <form>
+                                <div class="form-group">
+                                <table class="table table-striped">
+                                <thead>
+                                <tr><th>Название</th><th>Значенние</th></tr>
+                                </thead>
+                                <tbody data-bind="foreach: productValues">
+                                <tr>
+                                <td data-bind="text: name"></td>
+                                <td><input class="form-control" type="text" data-bind="text: value"></td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                </div>
+                                @*<div class="form-group">*@
+                                    @*<label>Description</label>*@
+                                    @*<textarea class="form-control textarea" placeholder="Description" name="Description" data-bind="value: description"></textarea>*@
+                                @*</div>*@
+                                <div class="clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right" data-bind="click: $root.saveProductValues" id="btn-add">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@routes.Assets.at("javascripts/chosen.jquery.min.js")"></script>
+    <script language = "javascript" lang="javascript" src ='@routes.Assets.at("javascripts/productValues.js")'></script>
+
+    <script type="text/JavaScript">
+            window.onload = function() {
+                var mass = ['/assets/stylesheets/products.css', '/assets/stylesheets/chosen.min.css', '/assets/stylesheets/new-product.css'];
+                for (var i = 0; i < mass.length; i++) {
+                    var a = document.createElement("link");
+                    a.rel = "stylesheet";
+                    a.href = mass[i];
+                    document.getElementsByTagName("head")[0].appendChild(a)
+                }
+            };
+
+            var config = {
+                '.chosen-select' : {},
+                '.chosen-select-deselect' : {allow_single_deselect: true},
+                '.chosen-select-no-single' : {disable_search_threshold: 10},
+                '.chosen-select-no-result': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+    </script>
+}
